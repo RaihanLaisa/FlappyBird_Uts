@@ -122,8 +122,8 @@ function play(){
 
             document.body.appendChild(pipe_sprite);
         }
-        pipe_seperation++;
-        requestAnimationFrame(create_pipe);
+       pipe_seperation++;
+       requestAnimationFrame(create_pipe);
     }
     requestAnimationFrame(create_pipe);
 }
