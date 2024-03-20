@@ -35,6 +35,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+//PLAY
 function play(){
     function move(){
         if(game_state != 'Play') return;
@@ -68,6 +69,7 @@ function play(){
     requestAnimationFrame(move);
 
     let bird_dy = 0;
+    //
     function apply_gravity(){
         if(game_state != 'Play') return;
         bird_dy = bird_dy + grativy;
@@ -100,7 +102,7 @@ function play(){
     let pipe_seperation = 0;
 
     let pipe_gap = 47;
-
+//3
     function create_pipe(){
         if(game_state != 'Play') return;
 
