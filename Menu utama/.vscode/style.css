@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://logonoid.com/flappy-bird-logo/" target="_blank"><img src="https://logonoid.com/images/thumbs/flappy-bird-logo.png"  alt="Flappy Bird Logo');
 
 * {
     margin: 0;
@@ -46,7 +46,7 @@ body {
 .game-click li a {
     color: white;
     font-size: 20px;
-    background-color: #00008B;
+    background-color: #0f9741;
     padding: 15px 30px; /* Tetapkan padding yang sama */
     border-radius: 25px;
     text-decoration: none;
@@ -57,5 +57,5 @@ body {
 
 
 .game-click li a:hover {
-    background-color: #0000FF; /* Ubah warna latar belakang saat dihover */
+    background-color: #1dab47; /* Ubah warna latar belakang saat dihover */
 }
