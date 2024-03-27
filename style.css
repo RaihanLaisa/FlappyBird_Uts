@@ -14,8 +14,8 @@
     background-size: cover;
 }
 .bird {
-	height: 100px;
-	width: 130px;
+	height: 70px;
+	width: 90px;
 	position: fixed;
 	top: 40vh;
 	left: 30vw;
@@ -72,7 +72,7 @@
 		
 	}
 	.score{
-		font-size: 8vh;
+		font-size: 18vh;
 	}
 	.bird{
 		width: 120px;
