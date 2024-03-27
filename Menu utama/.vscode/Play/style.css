@@ -1,84 +1,56 @@
-* {
+body {
+	font-family: 'Times New Roman', sans-serif;
+	background-color: #3a3939;
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
-	font-family: Arial, Helvetica, sans-serif;
-}
-.background {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 100vh;
-	width: 100vw;
-	background: url('images/background-img.png') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }
-.bird {
-	height: 80px;
-	width: 100px;
-	position: fixed;
-	top: 40vh;
-	left: 30vw;
-	z-index: 100;
-}
-.pipe_sprite {
-	position: fixed;
-	top: 40vh;
-	left: 100vw;
-	height: 70vh;
-	width: 6vw;
-	background:radial-gradient(rgb(12, 147, 12) 50%, rgb(0, 130, 59));
-	border: 5px solid black;
-}
-.message {
-	position: absolute;
-	z-index: 10;
-	color: black;
-	top: 30%;
-	left: 50%;
-	font-size: 4em;
-	transform: translate(-50%, -50%);
+
+#container {
+	background-color: #e6e4e4;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	padding: 20px;
 	text-align: center;
+	max-width: 600px;
+	width: 100%;
 }
-.messageStyle{
-	background: white;
-	padding: 30px;
-	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-	border-radius: 5%;
+
+h1 {
+	color: #34db3c;
 }
-.score {
-	position: fixed;
-	z-index: 10;
-	height: 10vh;
-	font-size: 10vh;
-	font-weight: 100;
-	color: white;
-	-webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: black;
-	top: 0;
-	left: 0;
-	margin: 10px;
-	font-family: Arial, Helvetica, sans-serif;
+
+p {
+	margin: 12px 0;
+	color: #000000;
 }
-.score_val {
-	color: gold;
-	font-weight: bold;
+
+table {
+	background-color: #71e64a;
+	border-collapse: collapse;
+	margin-top: 20px;
+	width: 100%;
 }
-@media only screen and (max-width: 1080px) {
-    .message{
-		font-size: 50px;
-		top: 50%;
-		white-space: nowrap;
-		
-	}
-	.score{
-		font-size: 18vh;
-	}
-	.bird{
-		width: 120px;
-		height: 90px;
-	}
-	.pipe_sprite{
-		width: 14vw;
-	}
+
+td {
+	padding: 6px;
+	border: 1px solid #ffffff;
+}
+
+h2 {
+	color: #34db3c;
+	margin-top: 20px;
+}
+
+h3 {
+	color: #34db3c;
+	margin-top: 20px;
+}
+
+.explanation {
+	text-align: justify;
+	color: #555;
 }
