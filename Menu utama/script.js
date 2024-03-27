@@ -1,191 +1,126 @@
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
+let move_speed = 2.4, grativy = 0.28;
+let bird = document.querySelector('.bird');
+let img = document.getElementById('bird-1');
+let sound_point = new Audio('sounds effect/point.mp3');
+let sound_die = new Audio('sounds effect/die.mp3');
 
-var ballRadius = 10;
+let bird_props = bird.getBoundingClientRect();
+let background = document.querySelector('.background').getBoundingClientRect();
 
-var paddleHeight = 10;
-var paddleWidth = 75;
-var paddleX = (canvas.width-paddleWidth)/2;
+let score_val = document.querySelector('.score_val');
+let message = document.querySelector('.message');
+let score_title = document.querySelector('.score_title');
 
-var rightPressed = false;
-var leftPressed = false;
+let game_state = 'Start';
+img.style.display = 'none';
+message.classList.add('messageStyle');
 
-var x = canvas.width/2;
-var y = canvas.height-30;
-var dx = 2;
-var dy = -2;
-
-var brickRowCount = 3;
-var brickColumnCount = 5;
-var brickWidth = 75;
-var brickHeight = 20;
-var brickPadding = 10;
-var brickOffsetTop = 30;
-var brickOffsetLeft = 30;
-
-var score = 0;
-var lives = 3;
-
-var bricks = [];
-for(c=0; c<brickColumnCount; c++) {
-    bricks[c] = [];
-    for(r=0; r<brickRowCount; r++) {
-         bricks[c][r] = { x: 0, y: 0, status: 1 };
+document.addEventListener('keydown', (e) => {
+    
+    if(e.key == 'Enter' && game_state != 'Play'){
+        document.querySelectorAll('.pipe_sprite').forEach((e) => {
+            e.remove();
+        });
+        img.style.display = 'block';
+        bird.style.top = '40vh';
+        game_state = 'Play';
+        message.innerHTML = '';
+        score_title.innerHTML = 'Score : ';
+        score_val.innerHTML = '0';
+        message.classList.remove('messageStyle');
+        play();
     }
-}
+});
 
-function drawball(){
-    ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "#DC143C";
-    ctx.fill();
-    ctx.closePath();
-}
-function drawPaddle() {
-    ctx.beginPath();
-    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#228B22";
-    ctx.fill();
-    ctx.closePath();
-}
+function play(){
+    function move(){
+        if(game_state != 'Play') return;
 
-function drawBricks() {
-    for(c=0; c<brickColumnCount; c++) {
-        for(r=0; r<brickRowCount; r++) {
-             if(bricks[c][r].status == 1) {
-                var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
-                var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
-                bricks[c][r].x = brickX;
-                bricks[c][r].y = brickY;
-                ctx.beginPath();
-                ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                ctx.fillStyle = "#00008B";
-                ctx.fill();
-                ctx.closePath();
-            }
-        }
-    }
-}
+        let pipe_sprite = document.querySelectorAll('.pipe_sprite');
+        pipe_sprite.forEach((element) => {
+            let pipe_sprite_props = element.getBoundingClientRect();
+            bird_props = bird.getBoundingClientRect();
 
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBricks();
-    drawball();
-    drawPaddle();
-    drawScore();
-    alto();
-    drawLives();
-    collisionDetection();
-    x += dx;
-    y += dy;
-    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-        dx = -dx;
-    }
-    if(y + dy < ballRadius) {
-        dy = -dy;
-    } else if(y + dy > canvas.height-ballRadius) {
-        if(x > paddleX && x < paddleX + paddleWidth) {
-            dy = -dy;
-        }
-        else {
-            lives--;
-            if(!lives) {
-                alert("GAME OVER");
-                document.location.reload();
-            }
-            else {
-                x = canvas.width/2;
-                y = canvas.height-30;
-                dx = 2;
-                dy = -2;
-                paddleX = (canvas.width-paddleWidth)/2;
-            }
-        }
-    }
-    if(rightPressed && paddleX < canvas.width-paddleWidth) {
-        paddleX += 7;
-    }
-    else if(leftPressed && paddleX > 0) {
-        paddleX -= 7;
-    }
-    requestAnimationFrame(draw);
-}
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-
-function keyDownHandler(e) {
-    if(e.keyCode == 39) {
-        rightPressed = true;
-    }
-    else if(e.keyCode == 37) {
-        leftPressed = true;
-    }
-}
-
-function keyUpHandler(e) {
-    if(e.keyCode == 39) {
-        rightPressed = false;
-    }
-    else if(e.keyCode == 37) {
-        leftPressed = false;
-    }
-}
-function collisionDetection() {
-    for(c=0; c<brickColumnCount; c++) {
-        for(r=0; r<brickRowCount; r++) {
-            var b = bricks[c][r];
-            if(b.status == 1) {
-                if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
-                    dy = -dy;
-                    b.status = 0;
-                    score++;
-                    if(score == brickRowCount*brickColumnCount) {
-                        alert("SELAMAT ANDA MENANG!");
-                        document.location.reload();
+            if(pipe_sprite_props.right <= 0){
+                element.remove();
+            }else{
+                if(bird_props.left < pipe_sprite_props.left + pipe_sprite_props.width && bird_props.left + bird_props.width > pipe_sprite_props.left && bird_props.top < pipe_sprite_props.top + pipe_sprite_props.height && bird_props.top + bird_props.height > pipe_sprite_props.top){
+                    game_state = 'End';
+                    message.innerHTML = 'Game Over'.fontcolor('red') + '<br>Press Enter To Restart';
+                    message.classList.add('messageStyle');
+                    img.style.display = 'none';
+                    sound_die.play();
+                    return;
+                }else{
+                    if(pipe_sprite_props.right < bird_props.left && pipe_sprite_props.right + move_speed >= bird_props.left && element.increase_score == '1'){
+                        score_val.innerHTML =+ score_val.innerHTML + 1;
+                        sound_point.play();
                     }
+                    element.style.left = pipe_sprite_props.left - move_speed + 'px';
                 }
             }
-        }
+        });
+        requestAnimationFrame(move);
     }
-}
-function drawScore() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Score: "+score, 8, 20);
-}
+    requestAnimationFrame(move);
 
-function drawLives() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
-    ctx.fillText("Darah: "+lives, canvas.width-65, 20);
-}
+    let bird_dy = 0;
+    function apply_gravity(){
+        if(game_state != 'Play') return;
+        bird_dy = bird_dy + grativy;
+        document.addEventListener('keydown', (e) => {
+            if(e.key == 'ArrowUp' || e.key == ' '){
+                img.src = 'images/Bird-2.png';
+                bird_dy = -7.6;
+            }
+        });
 
-function alto() {
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "blue";
-    ctx.fillText("", 160, 17);
-}
-document.addEventListener("mousemove", mouseMoveHandler, false);
+        document.addEventListener('keyup', (e) => {
+            if(e.key == 'ArrowUp' || e.key == ' '){
+                img.src = 'images/Bird.png';
+            }
+        });
 
-function mouseMoveHandler(e) {
-    var relativeX = e.clientX - canvas.offsetLeft;
-    if(relativeX > 0 && relativeX < canvas.width) {
-        paddleX = relativeX - paddleWidth/2;
-    }
-}
+        if(bird_props.top <= 0 || bird_props.bottom >= background.bottom){
+            game_state = 'End';
+            message.style.left = '28vw';
+            window.location.reload();
+            message.classList.remove('messageStyle');
+            return;
+        }
+        bird.style.top = bird_props.top + bird_dy + 'px';
+        bird_props = bird.getBoundingClientRect();
+        requestAnimationFrame(apply_gravity);
+    }
+    requestAnimationFrame(apply_gravity);
 
-function mouseMoveHandler(e) {
-    var relativeX = e.clientX - canvas.offsetLeft;
-    if(relativeX > 0 && relativeX < canvas.width) {
-        paddleX = relativeX - paddleWidth/2;
-    }
-}
+    let pipe_seperation = 80;
 
-function mouseMoveHandler(e) {
-    var relativeX = e.clientX - canvas.offsetLeft;
-    if(relativeX > 0 && relativeX < canvas.width) {
-        paddleX = relativeX - paddleWidth/2;
-    }
-}
+    let pipe_gap = 50;
 
-draw();
+    function create_pipe(){
+        if(game_state != 'Play') return;
+
+        if(pipe_seperation > 100){
+            pipe_seperation = 50;
+
+            let pipe_posi = Math.floor(Math.random() * 43) + 8;
+            let pipe_sprite_inv = document.createElement('div');
+            pipe_sprite_inv.className = 'pipe_sprite';
+            pipe_sprite_inv.style.top = pipe_posi - 70 + 'vh';
+            pipe_sprite_inv.style.left = '100vw';
+
+            document.body.appendChild(pipe_sprite_inv);
+            let pipe_sprite = document.createElement('div');
+            pipe_sprite.className = 'pipe_sprite';
+            pipe_sprite.style.top = pipe_posi + pipe_gap + 'vh';
+            pipe_sprite.style.left = '100vw';
+            pipe_sprite.increase_score = '1';
+
+            document.body.appendChild(pipe_sprite);
+        }
+       pipe_seperation++;
+       requestAnimationFrame(create_pipe);
+    }
+    requestAnimationFrame(create_pipe);
+}
