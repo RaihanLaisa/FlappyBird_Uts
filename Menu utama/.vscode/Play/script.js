@@ -1,4 +1,4 @@
-let move_speed = 10, grativy = 0.28;
+let move_speed = 3, grativy = 0.28;
 let bird = document.querySelector('.bird');
 let img = document.getElementById('bird-1');
 let sound_point = new Audio('sounds effect/point.mp3');
@@ -94,15 +94,15 @@ function play(){
     }
     requestAnimationFrame(apply_gravity);
 
-    let pipe_seperation = 0;
+    let pipe_seperation = 20;
 
-    let pipe_gap = 47;
+    let pipe_gap = 45;
 
     function create_pipe(){
         if(game_state != 'Play') return;
 
-        if(pipe_seperation > 115){
-            pipe_seperation = 70;
+        if(pipe_seperation > 110){
+            pipe_seperation = 30;
 
             let pipe_posi = Math.floor(Math.random() * 43) + 8;
             let pipe_sprite_inv = document.createElement('div');
