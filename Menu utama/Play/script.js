@@ -94,15 +94,15 @@ function play(){
     }
     requestAnimationFrame(apply_gravity);
 
-    let pipe_seperation = 80;
+    let pipe_seperation = 0;
 
     let pipe_gap = 50;
 
     function create_pipe(){
         if(game_state != 'Play') return;
 
-        if(pipe_seperation > 100){
-            pipe_seperation = 50;
+        if(pipe_seperation > 120){
+            pipe_seperation = 0;
 
             let pipe_posi = Math.floor(Math.random() * 43) + 8;
             let pipe_sprite_inv = document.createElement('div');
