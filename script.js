@@ -5,7 +5,6 @@ let sound_point = new Audio('sounds effect/point.mp3');
 let sound_die = new Audio('sounds effect/die.mp3');
 
 let bird_props = bird.getBoundingClientRect();
-
 let background = document.querySelector('.background').getBoundingClientRect();
 
 let score_val = document.querySelector('.score_val');
