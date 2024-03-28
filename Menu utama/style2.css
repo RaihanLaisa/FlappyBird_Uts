@@ -1,37 +1,257 @@
-@import url('https://logonoid.com/flappy-bird-logo/" target="_blank"><img src="https://logonoid.com/images/thumbs/flappy-bird-logo.png"  alt="Flappy Bird Logo');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
 }
 
-body {
-    min-height: 100vh;
-    background: linear-gradient(180deg, #231059, #151414);
-    color: white;
-    padding: 12px;
-    font-family: 'Fredoka One', cursive;
-}
-
-.judul {
-    text-align: center;
-    color: white;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    font-size: 50px;
-    background-size: cover;
-    padding: 20px;
-}
-
-.content {
+header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    height: 100px;
+    padding: 0 5%;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+}
+header h1 {
+    font-size: 40px;
+    color: white;
+}
+header nav {
+    display: flex;
+    gap: 30px;
+}
+header nav a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 99px;
+    transition: 0.3s;
+    color: white;
+}
+header nav a.active {
+    background: #5DA3EB;
+}
+header nav a:hover {
+    background: #3a77bd;
+}
+header nav:hover > a:not(:hover) {
+    background: none;
 }
 
-.game-nav {
+.home {
+    display: flex;
+    height: 100vh;
+    background: linear-gradient(to top, #5DA3EB 30%, #7fbfff);
+    position: relative;
+    overflow: hidden;
+}
+
+.home img {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    pointer-events: none;
+}
+
+.home .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 80px;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+.alur, .chart{
+   
+   
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10%;
+    text-align: center;
+}
+
+
+.alur {
+    height: 120vh;
+    background-image: url("assets/skena.png"); 
+    
+}
+.chart { 
+    height: 120vh;
+    background-color: transparent;
+  }
+
+
+.gamescenario, .flowchart {
+  max-width: 800px;
+  width: 700px;
+  height: auto;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: center;
+    justify-content: center;
+}
+.gamescenario, .flowchart h1 {
+  font-size: 40px;
+  margin-top: 8px;
+  font-weight: 800;
+  background-color: transparent;
+}
+
+.gamescenario p {
+  font-size: 18px;
+  color: #000000;
+  font-weight: 100;
+  text-align: center;
+}
+.flowchart img{
+    height: 80vh;
+}
+
+footer {
+  background-color: rgb(122, 231, 166);
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Exo 2', sans-serif;
+}
+
+body{
+  background: #a397db;
+  background-image: url("assets/latar daun.png"); 
+}
+.wrapper{
+  margin-top: 60px;
+  text-align: center;
+}
+
+.wrapper h1{
+  font-family: 'Yatra One', cursive;
+  font-size: 48px;
+  color: #1f1b1b;
+  margin-bottom: 25px;
+}
+.our_team{
+  width: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.our_team .team_member{
+  width: 250px;
+  margin: 5px;
+  background: #fff;
+  padding: 20px 10px;
+}
+
+.our_team .team_member .member_img{
+  background: #e9e5fa;  
+  max-width: 190px;
+  width: 100%;
+  height: 190px;
+  margin: 0 auto;
+  border-radius: 50%;
+  padding: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.our_team .team_member .member_img img{
+  width: 100%;
+  height: 100%;
+}
+
+.our_team .team_member h3{
+  text-transform: uppercase;
+  font-size: 20px;
+  line-height: 18px;
+  letter-spacing: 2px;
+  margin: 15px 0 0px;
+}
+
+.our_team .team_member span{
+  font-size: 14px;
+}
+
+.our_team .team_member p{
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.our_team .team_member .member_img .social_media{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: rgba(0,0,0,0.65);
+  width: 95%;
+  height: 95%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0);
+   transition: all 0.5s ease;
+}
+
+.our_team .team_member .member_img .social_media .item{
+  margin: 0 10px;
+}
+
+.our_team .team_member .member_img .social_media .fab{
+  color: #8c7ae6;
+  font-size: 20px;
+}
+
+.our_team .team_member .member_img:hover .social_media{
+  transform: scale(1);
+}
+  
+  .buttonmore a{
+    position: relative;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;   
+  }
+  .buttonmore {
+    background-color: rgb(128, 0, 0);
+    background-color: #f10707;
+    border-radius: 8px;
+    padding: 4px ;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  .buttonmore:hover{
+    scale: 1.2;  
+  }
+
+  .game-nav {
     text-align: center;
 }
 
@@ -46,7 +266,7 @@ body {
 .game-click li a {
     color: white;
     font-size: 20px;
-    background-color: #0f9741;
+    background-color: #00008B;
     padding: 15px 30px; /* Tetapkan padding yang sama */
     border-radius: 25px;
     text-decoration: none;
@@ -57,5 +277,5 @@ body {
 
 
 .game-click li a:hover {
-    background-color: #1dab47; /* Ubah warna latar belakang saat dihover */
+    background-color: #0000FF; /* Ubah warna latar belakang saat dihover */
 }
