@@ -10,6 +10,8 @@ let background = document.querySelector('.background').getBoundingClientRect();
 let score_val = document.querySelector('.score_val');
 let message = document.querySelector('.message');
 let score_title = document.querySelector('.score_title');
+let pipesPassed = 0;
+let score = 0;
 
 let game_state = 'Start';
 img.style.display = 'none';
@@ -51,10 +53,20 @@ function play(){
                     img.style.display = 'none';
                     sound_die.play();
                     return;
+                    
                 }else{
                     if(pipe_sprite_props.right < bird_props.left && pipe_sprite_props.right + move_speed >= bird_props.left && element.increase_score == '1'){
-                        score_val.innerHTML =+ score_val.innerHTML + 1;
+                        score++; 
+                        score_val.innerHTML = score;
                         sound_point.play();
+                        if(score >=10){
+                            game_state = 'End';
+                            message.innerHTML = 'Congratulations! You Win!'.fontcolor('pink') + '<br>Press Enter To Restart';
+                            message.classList.add('messageStyle');
+                            img.style.display = 'none';
+                            sound_die.play();
+                            return;
+                        }
                     }
                     element.style.left = pipe_sprite_props.left - move_speed + 'px';
                 }
