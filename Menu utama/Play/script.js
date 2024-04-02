@@ -56,16 +56,16 @@ function play(){
                     
                 }else{
                     if(pipe_sprite_props.right < bird_props.left && pipe_sprite_props.right + move_speed >= bird_props.left && element.increase_score == '1'){
-                        score++; 
-                        score_val.innerHTML = score;
-                        sound_point.play();
-                        if(score >=10){
-                            game_state = 'End';
-                            message.innerHTML = 'Congratulations! You Win!'.fontcolor('pink') + '<br>Press Enter To Restart';
-                            message.classList.add('messageStyle');
-                            img.style.display = 'none';
-                            sound_die.play();
-                            return;
+                    score++; 
+                    score_val.innerHTML = score;
+                    sound_point.play();
+                    if(score >=10){
+                        game_state = 'End';
+                        message.innerHTML = 'Congratulations! You Win!'.fontcolor('pink') + '<br>Press Enter To Restart';
+                        message.classList.add('messageStyle');
+                        img.style.display = 'none';
+                        sound_die.play();
+                        return;
                         }
                     }
                     element.style.left = pipe_sprite_props.left - move_speed + 'px';
